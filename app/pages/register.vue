@@ -61,7 +61,7 @@ const onSubmit = async (): Promise<void> => {
 		<v-card width="440" class="pa-2">
 			<v-card-title class="text-h5 pt-4">Регистрация</v-card-title>
 			<v-card-subtitle>
-				После регистрации на почту придёт письмо с подтверждением
+				Ссылка из письма подтвердит email и сразу выполнит вход
 			</v-card-subtitle>
 
 			<v-card-text>
@@ -135,6 +135,13 @@ const onSubmit = async (): Promise<void> => {
 					</v-btn>
 				</v-form>
 			</v-card-text>
+
+			<v-card-actions class="justify-center">
+				Уже есть аккаунт?
+				<v-btn to="/auth/login" variant="text" color="primary">
+					Войти
+				</v-btn>
+			</v-card-actions>
 		</v-card>
 	</v-container>
 </template>

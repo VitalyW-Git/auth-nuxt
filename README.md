@@ -19,7 +19,20 @@ npm run dev        # http://localhost:3000
 docker run -d --name mailhog -p 1025:1025 -p 8025:8025 mailhog/mailhog   # UI на :8025
 ```
 
-Страницы: `/` — ссылка на регистрацию, `/register` — форма.
+Страницы: `/` — ссылки на регистрацию и вход, `/register` — регистрация, `/auth/login` — вход
+(с кодом 2FA, если он включён), `/auth/new-verification?token=…` — сюда ведёт ссылка из письма,
+`/dashboard/settings` — только для авторизованных.
+
+## Авторизация
+
+Регистрация сессию **не** создаёт: бэкенд требует подтвердить email, а вход неподтверждённого
+пользователя отклоняет. Сессию создают два эндпоинта — `POST /auth/email-confirmation` (страница
+`/auth/new-verification`) и `POST /auth/login`, — после обоих клиент уводит на `/dashboard/settings`.
+
+Cookie сессии httpOnly, из JS её не видно, поэтому состояние входа узнаётся запросом
+`GET /users/profile`. Это делает route middleware `app/middleware/auth.ts`: при 401 отправляет на
+`/auth/login`. Защищённую страницу помечают `definePageMeta({ middleware: 'auth' })`. Пользователь
+хранится в `useState` внутри composable `app/composables/useAuth.ts`.
 
 ## Почему так устроено
 
