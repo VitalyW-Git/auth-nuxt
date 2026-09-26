@@ -1,6 +1,7 @@
 import type {
 	LoginPayload,
 	LoginResponse,
+	OAuthProvider,
 	SessionResponse,
 	User
 } from '~/types/auth'
@@ -43,5 +44,14 @@ export const useAuth = () => {
 		user.value = null
 	}
 
-	return { user, fetchProfile, confirmEmail, login, logout }
+	// Бэкенд отдаёт адрес провайдера, сам принимает callback, создаёт сессию
+	// и возвращает пользователя на /dashboard/settings.
+	const loginWithOAuth = async (provider: OAuthProvider): Promise<void> => {
+		const { data } = await $api.get<{ url: string }>(
+			`/auth/oauth/connect/${provider}`
+		)
+		window.location.href = data.url
+	}
+
+	return { user, fetchProfile, confirmEmail, login, logout, loginWithOAuth }
 }

@@ -39,3 +39,6 @@ export interface SessionResponse {
 
 // Вход с включённой 2FA сначала возвращает только message — код ушёл на почту
 export type LoginResponse = SessionResponse | MessageResponse
+
+// Имена провайдеров из AuthProviderGuard бэкенда: /auth/oauth/connect/:provider
+export type OAuthProvider = 'google' | 'yandex'

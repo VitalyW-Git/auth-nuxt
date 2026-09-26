@@ -13,7 +13,20 @@ export default defineNuxtConfig({
 
 	modules: ['vuetify-nuxt-module'],
 
-	css: ['@mdi/font/css/materialdesignicons.css'],
+	css: ['~/assets/styles/layers.css', '@mdi/font/css/materialdesignicons.css'],
+
+	app: {
+		head: {
+			link: [
+				{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+				{ rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+				{
+					rel: 'stylesheet',
+					href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap'
+				}
+			]
+		}
+	},
 
 	runtimeConfig: {
 		public: {
@@ -33,7 +46,22 @@ export default defineNuxtConfig({
 	vuetify: {
 		vuetifyOptions: {
 			theme: {
-				defaultTheme: 'dark'
+				defaultTheme: 'dark',
+				// Светлая тема главной страницы, по макету «Home — Desktop 1440» в Figma.
+				// Формы входа и кабинет остаются в тёмной теме по умолчанию.
+				themes: {
+					clinic: {
+						dark: false,
+						colors: {
+							primary: '#0FA3A3',
+							secondary: '#0B2A3C',
+							background: '#F4F9FA',
+							surface: '#FFFFFF',
+							'on-background': '#0B2A3C',
+							'on-surface': '#0B2A3C'
+						}
+					}
+				}
 			},
 			defaults: {
 				VTextField: {

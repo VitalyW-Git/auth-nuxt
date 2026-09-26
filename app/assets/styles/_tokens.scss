@@ -1,0 +1,21 @@
+// Shared design tokens from the Figma file (home and auth pages).
+
+$ink: #0b2a3c;
+$muted: #5b7183;
+$primary: #0fa3a3;
+$primary-dark: #0b7f84;
+$tint: #e3f5f4;
+$bg: #f4f9fa;
+$line: #d6e6e9;
+$white: #fff;
+
+$container: 1248px;
+$radius-card: 24px;
+$radius-large: 32px;
+
+// Vuetify breakpoints: sm 600, md 960, lg 1280
+@mixin below($width) {
+	@media (max-width: $width - 1) {
+		@content;
+	}
+}

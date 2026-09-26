@@ -1,0 +1,8 @@
+/*
+ * Vuetify 4 keeps its styles in cascade layers but never declares their order:
+ * it is taken from whichever file mentions a layer first. Component styles come
+ * with lazy page chunks, after the theme stylesheet injected from JS, so
+ * vuetify-components could end up above vuetify-utilities and .v-btn--variant-flat
+ * would override .bg-primary. This declaration must load before anything else.
+ */
+@layer vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final;

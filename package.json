@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
+    "sass-embedded": "^1.105.0",
     "vuetify": "^4.2.1",
     "vuetify-nuxt-module": "^1.0.0-rc.6"
   }

@@ -57,91 +57,89 @@ const onSubmit = async (): Promise<void> => {
 </script>
 
 <template>
-	<v-container class="d-flex justify-center align-center" style="min-height: 100vh">
-		<v-card width="440" class="pa-2">
-			<v-card-title class="text-h5 pt-4">Регистрация</v-card-title>
-			<v-card-subtitle>
-				Ссылка из письма подтвердит email и сразу выполнит вход
-			</v-card-subtitle>
+	<AuthShell panel-title="Личный кабинет пациента">
+		<h2 class="auth__title">Регистрация</h2>
+		<p class="auth__subtitle">
+			Ссылка из письма подтвердит email и сразу выполнит вход
+		</p>
 
-			<v-card-text>
-				<v-alert
-					v-if="successMessage"
-					type="success"
-					variant="tonal"
-					class="mb-4"
-					:text="successMessage"
-				/>
+		<v-alert
+			v-if="successMessage"
+			type="success"
+			variant="tonal"
+			class="mb-4"
+			:text="successMessage"
+		/>
 
-				<v-alert
-					v-if="serverErrors.length"
-					type="error"
-					variant="tonal"
-					class="mb-4"
-				>
-					<div v-for="message in serverErrors" :key="message">
-						{{ message }}
-					</div>
-				</v-alert>
+		<v-alert
+			v-if="serverErrors.length"
+			type="error"
+			variant="tonal"
+			class="mb-4"
+		>
+			<div v-for="message in serverErrors" :key="message">
+				{{ message }}
+			</div>
+		</v-alert>
 
-				<v-form v-model="isValid" @submit.prevent="onSubmit">
-					<v-text-field
-						v-model="form.name"
-						label="Имя"
-						:rules="nameRules"
-						autocomplete="name"
-						prepend-inner-icon="mdi-account-outline"
-					/>
+		<v-form v-model="isValid" class="auth__form" @submit.prevent="onSubmit">
+			<v-text-field
+				v-model="form.name"
+				label="Имя"
+				:rules="nameRules"
+				autocomplete="name"
+				prepend-inner-icon="mdi-account-outline"
+			/>
 
-					<v-text-field
-						v-model="form.email"
-						label="Email"
-						type="email"
-						:rules="emailRules"
-						autocomplete="email"
-						prepend-inner-icon="mdi-email-outline"
-					/>
+			<v-text-field
+				v-model="form.email"
+				label="Email"
+				type="email"
+				:rules="emailRules"
+				autocomplete="email"
+				prepend-inner-icon="mdi-email-outline"
+			/>
 
-					<v-text-field
-						v-model="form.password"
-						label="Пароль"
-						:type="isPasswordVisible ? 'text' : 'password'"
-						:rules="passwordRules"
-						autocomplete="new-password"
-						prepend-inner-icon="mdi-lock-outline"
-						:append-inner-icon="isPasswordVisible ? 'mdi-eye-off' : 'mdi-eye'"
-						@click:append-inner="isPasswordVisible = !isPasswordVisible"
-					/>
+			<v-text-field
+				v-model="form.password"
+				label="Пароль"
+				:type="isPasswordVisible ? 'text' : 'password'"
+				:rules="passwordRules"
+				autocomplete="new-password"
+				prepend-inner-icon="mdi-lock-outline"
+				:append-inner-icon="isPasswordVisible ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"
+				hint="Минимум 6 символов"
+				persistent-hint
+				@click:append-inner="isPasswordVisible = !isPasswordVisible"
+			/>
 
-					<v-text-field
-						v-model="form.passwordRepeat"
-						label="Повторите пароль"
-						:type="isPasswordVisible ? 'text' : 'password'"
-						:rules="passwordRepeatRules"
-						autocomplete="new-password"
-						prepend-inner-icon="mdi-lock-check-outline"
-					/>
+			<v-text-field
+				v-model="form.passwordRepeat"
+				label="Повторите пароль"
+				:type="isPasswordVisible ? 'text' : 'password'"
+				:rules="passwordRepeatRules"
+				autocomplete="new-password"
+				prepend-inner-icon="mdi-lock-check-outline"
+			/>
 
-					<v-btn
-						type="submit"
-						color="primary"
-						size="large"
-						block
-						class="mt-2"
-						:loading="isLoading"
-						:disabled="!isValid"
-					>
-						Зарегистрироваться
-					</v-btn>
-				</v-form>
-			</v-card-text>
+			<v-btn
+				type="submit"
+				color="primary"
+				size="x-large"
+				block
+				flat
+				:loading="isLoading"
+				:disabled="!isValid"
+			>
+				Зарегистрироваться
+			</v-btn>
+		</v-form>
 
-			<v-card-actions class="justify-center">
-				Уже есть аккаунт?
-				<v-btn to="/auth/login" variant="text" color="primary">
-					Войти
-				</v-btn>
-			</v-card-actions>
-		</v-card>
-	</v-container>
+		<AuthOAuth @error="serverErrors = $event" />
+
+		<p class="auth__switch">
+			Уже есть аккаунт?
+			<NuxtLink to="/auth/login">Войти</NuxtLink>
+		</p>
+	</AuthShell>
 </template>

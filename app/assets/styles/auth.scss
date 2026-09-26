@@ -1,0 +1,259 @@
+// Auth pages styles (register, login), based on the Figma frames "Register / Login".
+// Everything is nested under .auth so nothing leaks into other pages.
+
+@use 'tokens' as *;
+
+.auth {
+	display: flex;
+	min-height: 100vh;
+	color: $ink;
+	font-family: 'Manrope', sans-serif;
+
+	// :where() keeps the reset at zero specificity so BEM classes can set margins
+	:where(h1, h2, p, ul, figure, blockquote) {
+		margin: 0;
+	}
+
+	.v-btn {
+		font-family: inherit;
+		font-weight: 700;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+
+	.v-field {
+		border-radius: 12px;
+	}
+
+	// brand panel
+
+	&__panel {
+		flex: 0 0 600px;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: 64px;
+		background: linear-gradient(145deg, $primary-dark, $primary);
+		color: $white;
+
+		@include below(1280px) {
+			flex-basis: 44%;
+			padding: 48px;
+		}
+	}
+
+	&__logo {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		color: inherit;
+		font-size: 22px;
+		font-weight: 800;
+		text-decoration: none;
+	}
+
+	&__logo-mark {
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: $white;
+	}
+
+	&__pitch {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
+	}
+
+	&__pitch-title {
+		font-size: clamp(34px, 3.2vw, 44px);
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	&__pitch-text {
+		font-size: 18px;
+		line-height: 1.6;
+		opacity: 0.85;
+	}
+
+	&__perks {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 8px 0 0;
+		list-style: none;
+	}
+
+	&__perk {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		font-size: 16px;
+		font-weight: 500;
+	}
+
+	&__check {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border-radius: 50%;
+		background: rgba($white, 0.18);
+	}
+
+	&__quote {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 24px;
+		border-radius: 20px;
+		background: rgba($white, 0.12);
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 1.6;
+	}
+
+	&__quote-author {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		line-height: 1.4;
+
+		b,
+		small {
+			display: block;
+		}
+
+		b {
+			font-size: 14px;
+		}
+
+		small {
+			font-size: 13px;
+			opacity: 0.7;
+		}
+	}
+
+	&__quote-avatar {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 50%;
+		background: rgba($white, 0.35);
+		font-weight: 700;
+	}
+
+	// form side
+
+	&__side {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 48px 24px;
+	}
+
+	&__back {
+		margin-bottom: 24px;
+		color: $muted;
+		font-size: 15px;
+		font-weight: 600;
+		text-decoration: none;
+
+		&:hover {
+			color: $primary;
+		}
+	}
+
+	&__card {
+		width: 100%;
+		max-width: 480px;
+		padding: 40px 40px 32px;
+		border-radius: $radius-card;
+		background: $white;
+		box-shadow: 0 16px 48px rgba($ink, 0.06);
+
+		@include below(600px) {
+			padding: 28px 20px 24px;
+		}
+	}
+
+	&__title {
+		font-size: 32px;
+		font-weight: 800;
+	}
+
+	&__subtitle {
+		margin: 8px 0 24px;
+		color: $muted;
+		font-size: 15px;
+		line-height: 1.5;
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	&__divider {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin: 20px 0;
+		color: $muted;
+		font-size: 14px;
+
+		&::before,
+		&::after {
+			content: '';
+			flex: 1;
+			height: 1px;
+			background: $line;
+		}
+	}
+
+	&__oauth {
+		display: flex;
+		gap: 12px;
+	}
+
+	&__oauth-btn {
+		flex: 1;
+		border-color: $line;
+		color: $ink;
+		font-weight: 600;
+
+		&--google .auth__oauth-letter {
+			color: #ea4335;
+		}
+
+		&--yandex .auth__oauth-letter {
+			color: #fc3f1d;
+		}
+	}
+
+	&__oauth-letter {
+		margin-right: 10px;
+		font-size: 18px;
+		font-weight: 800;
+	}
+
+	&__switch {
+		margin-top: 24px;
+		color: $muted;
+		font-size: 15px;
+		text-align: center;
+
+		a {
+			color: $primary;
+			font-weight: 700;
+			text-decoration: none;
+		}
+	}
+}
