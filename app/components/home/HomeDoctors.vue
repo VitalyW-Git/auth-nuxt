@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const doctors = [
+const doctorsConst = [
 	{ name: 'Анна Смирнова', specialty: 'Стоматолог-терапевт', experience: 'Стаж 12 лет' },
 	{ name: 'Игорь Волков', specialty: 'Хирург-имплантолог', experience: 'Стаж 18 лет' },
 	{ name: 'Мария Орлова', specialty: 'Ортодонт', experience: 'Стаж 9 лет' },
@@ -16,7 +16,7 @@ const doctors = [
 				subtitle="Выберите врача и запишитесь к нему на удобное время."
 			/>
 			<v-row>
-				<v-col v-for="doctor in doctors" :key="doctor.name" cols="12" sm="6" lg="3">
+				<v-col v-for="doctor in doctorsConst" :key="doctor.name" cols="12" sm="6" lg="3">
 					<div class="doctors__card">
 						<!-- Заглушка, пока нет настоящих фото -->
 						<div class="doctors__photo">Фото врача</div>

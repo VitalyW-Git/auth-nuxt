@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const reviews = [
+const reviewsConst = [
 	{
 		text: 'Боялась стоматологов с детства, а здесь впервые лечила зубы спокойно. Анна Сергеевна всё объясняла на каждом этапе.',
 		author: 'Екатерина',
@@ -23,7 +23,7 @@ const reviews = [
 		<div class="home__container">
 			<HomeSectionHeading eyebrow="Отзывы" title="Что говорят пациенты" />
 			<v-row>
-				<v-col v-for="review in reviews" :key="review.author" cols="12" md="4">
+				<v-col v-for="review in reviewsConst" :key="review.author" cols="12" md="4">
 					<div class="reviews__card">
 						<v-rating :model-value="5" color="#FFB547" density="compact" size="small" readonly />
 						<p class="reviews__text">{{ review.text }}</p>

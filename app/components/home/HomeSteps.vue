@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const steps = [
+const stepsConst = [
 	{
 		number: '01',
 		title: 'Выберите услугу',
@@ -23,7 +23,7 @@ const steps = [
 		<div class="home__container">
 			<HomeSectionHeading eyebrow="Как записаться" title="Три шага до приёма" />
 			<v-row>
-				<v-col v-for="step in steps" :key="step.number" cols="12" md="4">
+				<v-col v-for="step in stepsConst" :key="step.number" cols="12" md="4">
 					<div class="steps__card">
 						<div class="steps__number">{{ step.number }}</div>
 						<h3 class="steps__title">{{ step.title }}</h3>

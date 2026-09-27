@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { LoginPayload } from '~/types/auth'
+import type { LoginPayloadInterface } from '~/types/auth'
 
 const { login } = useAuth()
 
-const form = ref<LoginPayload>({ email: '', password: '', code: '' })
+const form = ref<LoginPayloadInterface>({ email: '', password: '', code: '' })
 
 const isValid = ref(false)
 const isLoading = ref(false)

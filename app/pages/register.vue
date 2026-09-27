@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { MessageResponse, RegisterPayload } from '~/types/auth'
+import type { MessageResponseInterface, RegisterPayloadInterface } from '~/types/auth'
 
 const { $api } = useNuxtApp()
 
-const form = ref<RegisterPayload>({
+const form = ref<RegisterPayloadInterface>({
 	name: '',
 	email: '',
 	password: '',
@@ -42,7 +42,7 @@ const onSubmit = async (): Promise<void> => {
 	successMessage.value = ''
 	isLoading.value = true
 	try {
-		const { data } = await $api.post<MessageResponse>(
+		const { data } = await $api.post<MessageResponseInterface>(
 			'/auth/register',
 			form.value
 		)

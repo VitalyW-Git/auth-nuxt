@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const services = [
+const servicesConst = [
 	{
 		icon: 'mdi-tooth-outline',
 		title: 'Терапия',
@@ -48,7 +48,7 @@ const services = [
 				subtitle="От профилактики до сложной имплантации — без направлений в другие клиники."
 			/>
 			<v-row>
-				<v-col v-for="item in services" :key="item.title" cols="12" sm="6" md="4">
+				<v-col v-for="item in servicesConst" :key="item.title" cols="12" sm="6" md="4">
 					<div class="services__card">
 						<span class="icon-tile">
 							<v-icon :icon="item.icon" color="primary" size="28" />

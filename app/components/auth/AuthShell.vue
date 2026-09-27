@@ -4,7 +4,7 @@ defineProps<{
 	panelTitle: string
 }>()
 
-const perks = [
+const perksConst = [
 	'Онлайн-запись к любому врачу за минуту',
 	'История визитов, снимки и план лечения',
 	'Напоминания о приёме на почту'
@@ -23,7 +23,7 @@ const perks = [
 				<h1 class="auth__pitch-title">{{ panelTitle }}</h1>
 				<p class="auth__pitch-text">Один аккаунт — и вся ваша стоматология под рукой.</p>
 				<ul class="auth__perks">
-					<li v-for="perk in perks" :key="perk" class="auth__perk">
+					<li v-for="perk in perksConst" :key="perk" class="auth__perk">
 						<span class="auth__check">
 							<v-icon icon="mdi-check" size="16" />
 						</span>

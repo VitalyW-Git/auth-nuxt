@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const stats = [
+const statsConst = [
 	{ value: '4.9', label: 'рейтинг на картах' },
 	{ value: '12 000+', label: 'довольных пациентов' },
 	{ value: '15 лет', label: 'опыта работы' }
@@ -24,7 +24,7 @@ const stats = [
 						</v-btn>
 					</div>
 					<div class="hero__stats">
-						<div v-for="stat in stats" :key="stat.label">
+						<div v-for="stat in statsConst" :key="stat.label">
 							<div class="hero__stat-value">{{ stat.value }}</div>
 							<div class="hero__stat-label">{{ stat.label }}</div>
 						</div>

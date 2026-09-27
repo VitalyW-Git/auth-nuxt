@@ -1,20 +1,20 @@
 import type {
-	LoginPayload,
-	LoginResponse,
-	OAuthProvider,
-	SessionResponse,
-	User
+	LoginPayloadInterface,
+	LoginResponseType,
+	OAuthProviderType,
+	SessionResponseInterface,
+	UserInterface
 } from '~/types/auth'
 
 // Сессия живёт в httpOnly cookie, прочитать её из JS нельзя. Единственный
 // способ узнать, вошёл ли пользователь, — спросить защищённый /users/profile.
 export const useAuth = () => {
 	const { $api } = useNuxtApp()
-	const user = useState<User | null>('auth-user', () => null)
+	const user = useState<UserInterface | null>('auth-user', () => null)
 
-	const fetchProfile = async (): Promise<User | null> => {
+	const fetchProfile = async (): Promise<UserInterface | null> => {
 		try {
-			const { data } = await $api.get<User>('/users/profile')
+			const { data } = await $api.get<UserInterface>('/users/profile')
 			user.value = data
 		} catch {
 			user.value = null
@@ -22,8 +22,8 @@ export const useAuth = () => {
 		return user.value
 	}
 
-	const confirmEmail = async (token: string): Promise<User> => {
-		const { data } = await $api.post<SessionResponse>(
+	const confirmEmail = async (token: string): Promise<UserInterface> => {
+		const { data } = await $api.post<SessionResponseInterface>(
 			'/auth/email-confirmation',
 			{ token }
 		)
@@ -31,8 +31,8 @@ export const useAuth = () => {
 		return data.user
 	}
 
-	const login = async (payload: LoginPayload): Promise<LoginResponse> => {
-		const { data } = await $api.post<LoginResponse>('/auth/login', payload)
+	const login = async (payload: LoginPayloadInterface): Promise<LoginResponseType> => {
+		const { data } = await $api.post<LoginResponseType>('/auth/login', payload)
 		if ('user' in data) {
 			user.value = data.user
 		}
@@ -46,7 +46,7 @@ export const useAuth = () => {
 
 	// Бэкенд отдаёт адрес провайдера, сам принимает callback, создаёт сессию
 	// и возвращает пользователя на /dashboard/settings.
-	const loginWithOAuth = async (provider: OAuthProvider): Promise<void> => {
+	const loginWithOAuth = async (provider: OAuthProviderType): Promise<void> => {
 		const { data } = await $api.get<{ url: string }>(
 			`/auth/oauth/connect/${provider}`
 		)

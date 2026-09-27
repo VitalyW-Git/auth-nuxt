@@ -1,5 +1,5 @@
 // Повторяет RegisterDto бэкенда: src/modules/auth/presentation/dto/register.dto.ts
-export interface RegisterPayload {
+export interface RegisterPayloadInterface {
 	name: string
 	email: string
 	password: string
@@ -7,19 +7,19 @@ export interface RegisterPayload {
 }
 
 // Ответ RegisterHandler: { message: string }
-export interface MessageResponse {
+export interface MessageResponseInterface {
 	message: string
 }
 
 // Повторяет LoginDto бэкенда: src/modules/auth/presentation/dto/login.dto.ts
-export interface LoginPayload {
+export interface LoginPayloadInterface {
 	email: string
 	password: string
 	code?: string
 }
 
 // Повторяет UserInterface бэкенда: src/modules/user/domain/common/interfaces/user.interface.ts
-export interface User {
+export interface UserInterface {
 	id: string
 	email: string
 	displayName: string
@@ -32,13 +32,10 @@ export interface User {
 	updatedAt: string
 }
 
-// Ответ SessionService.saveSession: вход и подтверждение email
-export interface SessionResponse {
-	user: User
+export interface SessionResponseInterface {
+	user: UserInterface
 }
 
-// Вход с включённой 2FA сначала возвращает только message — код ушёл на почту
-export type LoginResponse = SessionResponse | MessageResponse
+export type LoginResponseType = SessionResponseInterface | MessageResponseInterface
 
-// Имена провайдеров из AuthProviderGuard бэкенда: /auth/oauth/connect/:provider
-export type OAuthProvider = 'google' | 'yandex'
+export type OAuthProviderType = 'google' | 'yandex'

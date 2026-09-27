@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 
-interface NestErrorBody {
+interface NestErrorBodyInterface {
 	message?: string | string[]
 	error?: string
 	statusCode?: number
@@ -12,7 +12,7 @@ interface NestErrorBody {
  */
 export const extractApiErrors = (error: unknown): string[] => {
 	if (error instanceof AxiosError) {
-		const body = error.response?.data as NestErrorBody | undefined
+		const body = error.response?.data as NestErrorBodyInterface | undefined
 		if (Array.isArray(body?.message)) {
 			return body.message
 		}

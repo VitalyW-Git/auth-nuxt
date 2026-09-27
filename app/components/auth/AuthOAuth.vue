@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { OAuthProvider } from '~/types/auth'
+import type { OAuthProviderType } from '~/types/auth'
 
 const emit = defineEmits<{
 	error: [messages: string[]]
@@ -7,15 +7,15 @@ const emit = defineEmits<{
 
 const { loginWithOAuth } = useAuth()
 
-const loadingProvider = ref<OAuthProvider | null>(null)
+const loadingProvider = ref<OAuthProviderType | null>(null)
 
-const providers: { id: OAuthProvider, title: string, letter: string }[] = [
+const providersConst: { id: OAuthProviderType, title: string, letter: string }[] = [
 	{ id: 'google', title: 'Google', letter: 'G' },
 	{ id: 'yandex', title: 'Яндекс', letter: 'Я' }
 ]
 
 // При успехе браузер уходит со страницы, поэтому индикатор сбрасывается только при ошибке.
-const onClick = async (provider: OAuthProvider): Promise<void> => {
+const onClick = async (provider: OAuthProviderType): Promise<void> => {
 	emit('error', [])
 	loadingProvider.value = provider
 	try {
@@ -32,7 +32,7 @@ const onClick = async (provider: OAuthProvider): Promise<void> => {
 
 	<div class="auth__oauth">
 		<v-btn
-			v-for="provider in providers"
+			v-for="provider in providersConst"
 			:key="provider.id"
 			variant="outlined"
 			size="x-large"

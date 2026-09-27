@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const columns = [
+const columnsConst = [
 	{ title: 'Клиника', links: ['О нас', 'Врачи', 'Лицензии', 'Вакансии'] },
 	{ title: 'Пациентам', links: ['Услуги и цены', 'Отзывы', 'Рассрочка', 'Личный кабинет'] },
 	{
@@ -20,7 +20,7 @@ const columns = [
 					</div>
 					<p class="footer__about">Современная стоматология для всей семьи</p>
 				</v-col>
-				<v-col v-for="column in columns" :key="column.title" cols="12" sm="4" md="">
+				<v-col v-for="column in columnsConst" :key="column.title" cols="12" sm="4" md="">
 					<div class="footer__column-title">{{ column.title }}</div>
 					<div v-for="link in column.links" :key="link" class="footer__link">{{ link }}</div>
 				</v-col>

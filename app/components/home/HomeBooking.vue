@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const services = [
+const servicesConst = [
 	'Терапия',
 	'Имплантация',
 	'Ортодонтия',
@@ -51,7 +51,7 @@ const onSubmit = (): void => {
 							<v-select
 								v-model="form.service"
 								label="Услуга"
-								:items="services"
+								:items="servicesConst"
 								:rules="[requiredRule]"
 								variant="outlined"
 								density="comfortable"

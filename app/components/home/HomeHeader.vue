@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { user, fetchProfile } = useAuth()
 
-const links = [
+const linksConst = [
 	{ title: 'Услуги', href: '#services' },
 	{ title: 'Врачи', href: '#doctors' },
 	{ title: 'Цены', href: '#services' },
@@ -27,7 +27,7 @@ onMounted(async () => {
 			</NuxtLink>
 
 			<nav class="header__nav d-none d-lg-flex">
-				<a v-for="link in links" :key="link.title" :href="link.href" class="header__link">
+				<a v-for="link in linksConst" :key="link.title" :href="link.href" class="header__link">
 					{{ link.title }}
 				</a>
 			</nav>
@@ -62,7 +62,7 @@ onMounted(async () => {
 					</template>
 					<v-list>
 						<v-list-item
-							v-for="link in links"
+							v-for="link in linksConst"
 							:key="link.title"
 							:href="link.href"
 							:title="link.title"

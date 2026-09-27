@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const benefits = [
+const benefitsConst = [
 	{
 		icon: 'mdi-hand-heart-outline',
 		title: 'Лечение без боли',
@@ -27,7 +27,7 @@ const benefits = [
 	<section class="benefits">
 		<div class="home__container">
 			<v-row>
-				<v-col v-for="item in benefits" :key="item.title" cols="12" sm="6" lg="3">
+				<v-col v-for="item in benefitsConst" :key="item.title" cols="12" sm="6" lg="3">
 					<div class="benefits__card">
 						<span class="icon-tile">
 							<v-icon :icon="item.icon" color="primary" size="28" />
