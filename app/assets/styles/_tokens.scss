@@ -1,4 +1,4 @@
-// Shared design tokens from the Figma file (home and auth pages).
+// Общие дизайн-токены из макета Figma (главная и страницы авторизации).
 
 $ink: #0b2a3c;
 $muted: #5b7183;
@@ -13,7 +13,7 @@ $container: 1248px;
 $radius-card: 24px;
 $radius-large: 32px;
 
-// Vuetify breakpoints: sm 600, md 960, lg 1280
+// Брейкпоинты Vuetify: sm 600, md 960, lg 1280
 @mixin below($width) {
 	@media (max-width: $width - 1) {
 		@content;

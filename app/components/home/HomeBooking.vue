@@ -16,8 +16,8 @@ const requiredRule = (v: string | null): boolean | string => !!v || 'Поле о
 const phoneRule = (v: string): boolean | string =>
 	v.replace(/\D/g, '').length >= 10 || 'Укажите телефон полностью.'
 
-// TODO: send the request once the backend has an appointments endpoint.
-// Until then the form only validates input and says so honestly.
+// TODO: отправлять заявку, когда у бэкенда появится эндпоинт записи на приём.
+// Пока форма только проверяет поля и честно об этом сообщает.
 const onSubmit = (): void => {
 	isSubmitted.value = true
 }

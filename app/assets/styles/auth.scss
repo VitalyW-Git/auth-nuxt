@@ -1,5 +1,5 @@
-// Auth pages styles (register, login), based on the Figma frames "Register / Login".
-// Everything is nested under .auth so nothing leaks into other pages.
+// Стили страниц авторизации (регистрация, вход) по фреймам Figma «Register / Login».
+// Всё вложено в .auth, чтобы стили не протекали на другие страницы.
 
 @use 'tokens' as *;
 
@@ -9,7 +9,7 @@
 	color: $ink;
 	font-family: 'Manrope', sans-serif;
 
-	// :where() keeps the reset at zero specificity so BEM classes can set margins
+	// :where() обнуляет специфичность сброса, чтобы БЭМ-классы могли задавать отступы
 	:where(h1, h2, p, ul, figure, blockquote) {
 		margin: 0;
 	}
@@ -25,7 +25,7 @@
 		border-radius: 12px;
 	}
 
-	// brand panel
+	// панель бренда
 
 	&__panel {
 		flex: 0 0 600px;
@@ -147,7 +147,7 @@
 		font-weight: 700;
 	}
 
-	// form side
+	// сторона с формой
 
 	&__side {
 		display: flex;
@@ -254,6 +254,56 @@
 			color: $primary;
 			font-weight: 700;
 			text-decoration: none;
+		}
+	}
+
+	&__forgot {
+		align-self: flex-end;
+		margin: -8px 0 16px;
+		color: $primary;
+		font-size: 14px;
+		font-weight: 600;
+		text-decoration: none;
+	}
+
+	// экраны результата: письмо отправлено, пароль изменён
+
+	&__status {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	&__status-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 72px;
+		height: 72px;
+		margin-bottom: 20px;
+		border-radius: 50%;
+		background: $tint;
+		color: $primary;
+	}
+
+	&__secondary-btn {
+		border-color: $line;
+		color: $ink;
+	}
+
+	&__link-btn {
+		padding: 0;
+		border: 0;
+		background: none;
+		color: $primary;
+		font: inherit;
+		font-weight: 700;
+		cursor: pointer;
+
+		&:disabled {
+			opacity: 0.5;
+			cursor: default;
 		}
 	}
 }

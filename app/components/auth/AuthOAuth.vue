@@ -14,7 +14,7 @@ const providers: { id: OAuthProvider, title: string, letter: string }[] = [
 	{ id: 'yandex', title: 'Яндекс', letter: 'Я' }
 ]
 
-// On success the browser leaves the page, so the spinner is reset only on error.
+// При успехе браузер уходит со страницы, поэтому индикатор сбрасывается только при ошибке.
 const onClick = async (provider: OAuthProvider): Promise<void> => {
 	emit('error', [])
 	loadingProvider.value = provider

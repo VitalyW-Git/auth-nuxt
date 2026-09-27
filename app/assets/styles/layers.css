@@ -1,8 +1,9 @@
 /*
- * Vuetify 4 keeps its styles in cascade layers but never declares their order:
- * it is taken from whichever file mentions a layer first. Component styles come
- * with lazy page chunks, after the theme stylesheet injected from JS, so
- * vuetify-components could end up above vuetify-utilities and .v-btn--variant-flat
- * would override .bg-primary. This declaration must load before anything else.
+ * Vuetify 4 раскладывает стили по каскадным слоям, но не объявляет их порядок:
+ * он берётся из того файла, который первым упомянул слой. Стили компонентов
+ * приходят с ленивыми чанками страниц уже после стилей темы, которые вставляет JS,
+ * поэтому vuetify-components мог оказаться выше vuetify-utilities, и
+ * .v-btn--variant-flat перебивал .bg-primary. Это объявление должно загружаться
+ * раньше всех остальных стилей.
  */
 @layer vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final;

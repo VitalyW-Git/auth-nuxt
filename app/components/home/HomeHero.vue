@@ -33,7 +33,7 @@ const stats = [
 
 				<v-col cols="12" md="6">
 					<div class="hero__picture">
-						<!-- Placeholder until a real photo is added -->
+						<!-- Заглушка, пока нет настоящего фото -->
 						<span class="hero__picture-label">Фото врача с пациентом</span>
 						<div class="hero__slot">
 							<span class="icon-tile">

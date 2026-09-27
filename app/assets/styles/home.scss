@@ -1,5 +1,5 @@
-// Home page styles, based on the Figma layout "Home — Desktop 1440".
-// Everything is nested under .home so nothing leaks into other pages.
+// Стили главной страницы по макету Figma «Home — Desktop 1440».
+// Всё вложено в .home, чтобы стили не протекали на другие страницы.
 
 @use 'tokens' as *;
 
@@ -17,7 +17,7 @@
 	color: $ink;
 	font-family: 'Manrope', sans-serif;
 
-	// :where() keeps the reset at zero specificity so BEM classes can set margins
+	// :where() обнуляет специфичность сброса, чтобы БЭМ-классы могли задавать отступы
 	:where(h1, h2, h3, p) {
 		margin: 0;
 	}
@@ -47,7 +47,7 @@
 		color: $muted;
 	}
 
-	// shared blocks
+	// общие блоки
 
 	.icon-tile {
 		display: flex;
@@ -108,7 +108,7 @@
 		}
 	}
 
-	// header
+	// шапка
 
 	.header {
 		position: sticky;
@@ -172,7 +172,7 @@
 		}
 	}
 
-	// hero
+	// первый экран
 
 	.hero {
 		padding: 80px 0 96px;
@@ -280,7 +280,7 @@
 		}
 	}
 
-	// benefits
+	// преимущества
 
 	.benefits {
 		padding-bottom: 96px;
@@ -302,7 +302,7 @@
 		}
 	}
 
-	// services
+	// услуги
 
 	.services {
 		background: $white;
@@ -349,7 +349,7 @@
 		}
 	}
 
-	// doctors
+	// врачи
 
 	.doctors {
 		&__card {
@@ -387,7 +387,7 @@
 		}
 	}
 
-	// steps
+	// шаги записи
 
 	.steps {
 		background: $white;
@@ -417,7 +417,7 @@
 		}
 	}
 
-	// reviews
+	// отзывы
 
 	.reviews {
 		&__card {
@@ -460,7 +460,7 @@
 		}
 	}
 
-	// booking
+	// запись на приём
 
 	.booking {
 		padding-bottom: 96px;
@@ -514,7 +514,7 @@
 		}
 	}
 
-	// footer
+	// подвал
 
 	.footer {
 		padding: 64px 0 40px;

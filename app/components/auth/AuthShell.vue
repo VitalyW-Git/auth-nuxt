@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Shared layout of the auth pages, Figma frames "Register / Login — Desktop 1440".
+// Общий каркас страниц авторизации, фреймы Figma «Register / Login — Desktop 1440».
 defineProps<{
 	panelTitle: string
 }>()

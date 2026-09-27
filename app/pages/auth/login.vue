@@ -92,6 +92,10 @@ const onSubmit = async (): Promise<void> => {
 				@click:append-inner="isPasswordVisible = !isPasswordVisible"
 			/>
 
+			<NuxtLink v-if="!isCodeRequired" to="/auth/reset-password" class="auth__forgot">
+				Забыли пароль?
+			</NuxtLink>
+
 			<v-text-field
 				v-if="isCodeRequired"
 				v-model="form.code"

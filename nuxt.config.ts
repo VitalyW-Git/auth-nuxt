@@ -1,4 +1,4 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// Справка по конфигурации: https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	// Аутентификация построена на серверной сессии в cookie. При SSR запрос уходит
 	// из Node, а не из браузера, и cookie нужно пробрасывать руками. Для формы

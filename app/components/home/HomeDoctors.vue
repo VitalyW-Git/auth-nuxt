@@ -18,7 +18,7 @@ const doctors = [
 			<v-row>
 				<v-col v-for="doctor in doctors" :key="doctor.name" cols="12" sm="6" lg="3">
 					<div class="doctors__card">
-						<!-- Placeholder until real photos are added -->
+						<!-- Заглушка, пока нет настоящих фото -->
 						<div class="doctors__photo">Фото врача</div>
 						<h3 class="doctors__name">{{ doctor.name }}</h3>
 						<div class="doctors__specialty">{{ doctor.specialty }}</div>
