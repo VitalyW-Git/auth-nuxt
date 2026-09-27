@@ -1,4 +1,3 @@
-// Справка по конфигурации: https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	// Аутентификация построена на серверной сессии в cookie. При SSR запрос уходит
 	// из Node, а не из браузера, и cookie нужно пробрасывать руками. Для формы
@@ -12,6 +11,30 @@ export default defineNuxtConfig({
 	devServer: { port: 3000 },
 
 	modules: ['vuetify-nuxt-module'],
+
+	typescript: {
+		strict: true,
+		tsConfig: {
+			compilerOptions: {
+				noUnusedLocals: true,
+				noUnusedParameters: true,
+				noImplicitReturns: true,
+				noFallthroughCasesInSwitch: true,
+				exactOptionalPropertyTypes: true
+			},
+			vueCompilerOptions: {
+				checkUnknownComponents: true,
+				checkUnknownDirectives: true
+			}
+		},
+		nodeTsConfig: {
+			compilerOptions: {
+				noUnusedLocals: true,
+				noUnusedParameters: true,
+				noImplicitReturns: true
+			}
+		}
+	},
 
 	css: ['~/assets/styles/layers.css', '@mdi/font/css/materialdesignicons.css'],
 

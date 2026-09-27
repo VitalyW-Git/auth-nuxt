@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { MessageResponseInterface, RegisterPayloadInterface } from '~/types/auth'
+import type { RegisterPayloadInterface } from '~/types/auth'
 
-const { $api } = useNuxtApp()
+const { register } = useAuth()
 
 const form = ref<RegisterPayloadInterface>({
 	name: '',
@@ -10,7 +10,7 @@ const form = ref<RegisterPayloadInterface>({
 	passwordRepeat: ''
 })
 
-const isValid = ref(false)
+const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
 const isPasswordVisible = ref(false)
 const serverErrors = ref<string[]>([])
@@ -42,10 +42,7 @@ const onSubmit = async (): Promise<void> => {
 	successMessage.value = ''
 	isLoading.value = true
 	try {
-		const { data } = await $api.post<MessageResponseInterface>(
-			'/auth/register',
-			form.value
-		)
+		const data = await register(form.value)
 		successMessage.value = data.message
 		form.value = { name: '', email: '', password: '', passwordRepeat: '' }
 	} catch (error) {

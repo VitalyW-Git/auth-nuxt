@@ -9,7 +9,7 @@ const servicesConst = [
 ]
 
 const form = ref({ name: '', phone: '', service: null as string | null })
-const isValid = ref(false)
+const isValid = ref<boolean | null>(false)
 const isSubmitted = ref(false)
 
 const requiredRule = (v: string | null): boolean | string => !!v || 'Поле обязательно для заполнения.'
@@ -41,11 +41,17 @@ const onSubmit = (): void => {
 								class="mb-4"
 								text="Онлайн-запись скоро заработает. Пока позвоните нам: +7 (495) 123-45-67."
 							/>
-							<v-text-field v-model="form.name" label="Ваше имя" :rules="[requiredRule]" />
+							<v-text-field
+								v-model="form.name"
+								label="Ваше имя"
+								:rules="[requiredRule]"
+								autocomplete="name"
+							/>
 							<v-text-field
 								v-model="form.phone"
 								label="Телефон"
 								type="tel"
+								autocomplete="tel"
 								:rules="[requiredRule, phoneRule]"
 							/>
 							<v-select

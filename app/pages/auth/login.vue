@@ -5,7 +5,7 @@ const { login } = useAuth()
 
 const form = ref<LoginPayloadInterface>({ email: '', password: '', code: '' })
 
-const isValid = ref(false)
+const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
 const isPasswordVisible = ref(false)
 const isCodeRequired = ref(false)

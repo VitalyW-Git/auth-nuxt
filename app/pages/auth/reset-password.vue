@@ -2,11 +2,11 @@
 // Первый шаг восстановления: бэкенд создаёт токен на час и присылает письмо
 // со ссылкой на /auth/new-password?token=... Ответ — просто true, без message,
 // поэтому текст экрана «Проверьте почту» живёт на клиенте.
-const { $api } = useNuxtApp()
+const { requestPasswordReset } = useAuth()
 
 const email = ref('')
 const sentTo = ref('')
-const isValid = ref(false)
+const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
 const serverErrors = ref<string[]>([])
 
@@ -20,7 +20,7 @@ const requestLink = async (address: string): Promise<void> => {
 	serverErrors.value = []
 	isLoading.value = true
 	try {
-		await $api.post('/auth/password-recovery/reset', { email: address })
+		await requestPasswordReset(address)
 		sentTo.value = address
 	} catch (error) {
 		serverErrors.value = extractApiErrors(error)

@@ -5,14 +5,14 @@ import { AxiosError } from 'axios'
 // `${ALLOWED_ORIGIN}/auth/new-password?token=...`. Смена пароля сессию не
 // создаёт, поэтому после успеха пользователь идёт на страницу входа.
 const route = useRoute()
-const { $api } = useNuxtApp()
+const { resetPassword } = useAuth()
 
 const token = computed(() =>
 	typeof route.query.token === 'string' ? route.query.token : ''
 )
 
 const password = ref('')
-const isValid = ref(false)
+const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
 const isPasswordVisible = ref(false)
 const isChanged = ref(false)
@@ -42,9 +42,7 @@ const onSubmit = async (): Promise<void> => {
 	serverErrors.value = []
 	isLoading.value = true
 	try {
-		await $api.post(`/auth/password-recovery/new/${token.value}`, {
-			password: password.value
-		})
+		await resetPassword(token.value, password.value)
 		isChanged.value = true
 	} catch (error) {
 		serverErrors.value = extractApiErrors(error)

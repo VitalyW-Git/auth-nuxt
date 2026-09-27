@@ -1,7 +1,9 @@
 import type {
 	LoginPayloadInterface,
 	LoginResponseType,
+	MessageResponseInterface,
 	OAuthProviderType,
+	RegisterPayloadInterface,
 	SessionResponseInterface,
 	UserInterface
 } from '~/types/auth'
@@ -53,5 +55,37 @@ export const useAuth = () => {
 		window.location.href = data.url
 	}
 
-	return { user, fetchProfile, confirmEmail, login, logout, loginWithOAuth }
+	// Регистрация сессию не создаёт: бэкенд присылает письмо, вход выполнит
+	// переход по ссылке из него (страница auth/new-verification).
+	const register = async (
+		payload: RegisterPayloadInterface
+	): Promise<MessageResponseInterface> => {
+		const { data } = await $api.post<MessageResponseInterface>('/auth/register', payload)
+		return data
+	}
+
+	// Бэкенд отвечает true и для незарегистрированного email, чтобы не раскрывать,
+	// кто зарегистрирован, поэтому результат не возвращается.
+	const requestPasswordReset = async (email: string): Promise<void> => {
+		await $api.post('/auth/password-recovery/reset', { email })
+	}
+
+	// Смена пароля сессию не создаёт и завершает все сессии пользователя на бэкенде.
+	const resetPassword = async (token: string, password: string): Promise<void> => {
+		await $api.post(`/auth/password-recovery/new/${encodeURIComponent(token)}`, {
+			password
+		})
+	}
+
+	return {
+		user,
+		fetchProfile,
+		confirmEmail,
+		login,
+		logout,
+		loginWithOAuth,
+		register,
+		requestPasswordReset,
+		resetPassword
+	}
 }

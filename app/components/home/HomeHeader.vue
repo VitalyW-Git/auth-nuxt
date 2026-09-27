@@ -58,7 +58,13 @@ onMounted(async () => {
 
 				<v-menu>
 					<template #activator="{ props }">
-						<v-btn v-bind="props" icon="mdi-menu" variant="text" class="d-lg-none" />
+						<v-btn
+							v-bind="props"
+							icon="mdi-menu"
+							variant="text"
+							class="d-lg-none"
+							aria-label="Открыть меню"
+						/>
 					</template>
 					<v-list>
 						<v-list-item
