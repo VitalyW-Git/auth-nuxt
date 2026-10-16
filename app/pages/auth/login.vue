@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { LoginPayloadInterface } from '~/types/auth'
+import type { LoginMethodType, LoginPayloadInterface } from '~/types/auth'
 
 const { login } = useAuth()
 
@@ -9,8 +9,24 @@ const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
 const isPasswordVisible = ref(false)
 const isCodeRequired = ref(false)
+const method = ref<LoginMethodType>('phone')
+const isPhoneCodeStep = ref(false)
 const serverErrors = ref<string[]>([])
 const infoMessage = ref('')
+
+const subtitlesConst: Record<LoginMethodType, string> = {
+	phone: 'Рады видеть вас снова. Войдите по номеру телефона — пришлём код в SMS.',
+	email: 'Рады видеть вас снова. Войдите по email и паролю или через Google и Яндекс.'
+}
+
+// На шагах с кодом (SMS или 2FA) способ входа уже выбран — переключатель скрыт.
+const isMethodSwitchVisible = computed((): boolean => !isPhoneCodeStep.value && !isCodeRequired.value)
+
+// Сообщения прошлого способа входа к новому не относятся.
+watch(method, () => {
+	serverErrors.value = []
+	infoMessage.value = ''
+})
 
 // Правила повторяют LoginDto бэкенда, тексты взяты оттуда же.
 const emailRules = [
@@ -47,9 +63,9 @@ const onSubmit = async (): Promise<void> => {
 <template>
 	<AuthShell panel-title="С возвращением!">
 		<h2 class="auth__title">Вход</h2>
-		<p class="auth__subtitle">
-			Рады видеть вас снова. Войдите по email и паролю или через Google и Яндекс.
-		</p>
+		<p v-if="!isPhoneCodeStep" class="auth__subtitle">{{ subtitlesConst[method] }}</p>
+
+		<AuthLoginTabs v-if="isMethodSwitchVisible" v-model="method" />
 
 		<v-alert
 			v-if="infoMessage"
@@ -71,7 +87,13 @@ const onSubmit = async (): Promise<void> => {
 			</div>
 		</v-alert>
 
-		<v-form v-model="isValid" class="auth__form" @submit.prevent="onSubmit">
+		<AuthPhoneLogin
+			v-if="method === 'phone'"
+			v-model:code-step="isPhoneCodeStep"
+			@error="serverErrors = $event"
+		/>
+
+		<v-form v-else v-model="isValid" class="auth__form" @submit.prevent="onSubmit">
 			<v-text-field
 				v-model="form.email"
 				label="Email"
@@ -119,11 +141,13 @@ const onSubmit = async (): Promise<void> => {
 			</v-btn>
 		</v-form>
 
-		<AuthOAuth @error="serverErrors = $event" />
+		<template v-if="!isPhoneCodeStep">
+			<AuthOAuth @error="serverErrors = $event" />
 
-		<p class="auth__switch">
-			Нет аккаунта?
-			<NuxtLink to="/register">Регистрация</NuxtLink>
-		</p>
+			<p class="auth__switch">
+				Нет аккаунта?
+				<NuxtLink to="/register">Регистрация</NuxtLink>
+			</p>
+		</template>
 	</AuthShell>
 </template>

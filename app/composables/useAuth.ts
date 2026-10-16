@@ -3,6 +3,7 @@ import type {
 	LoginResponseType,
 	MessageResponseInterface,
 	OAuthProviderType,
+	PhoneLoginPayloadInterface,
 	RegisterPayloadInterface,
 	SessionResponseInterface,
 	UserInterface
@@ -39,6 +40,18 @@ export const useAuth = () => {
 			user.value = data.user
 		}
 		return data
+	}
+
+	// Вход по телефону (ADR 0011). Эндпоинтов на бэкенде пока нет, адреса предварительные.
+	const sendPhoneCode = async (phone: string): Promise<void> => {
+		await $api.post('/auth/phone/code', { phone })
+	}
+
+	// Новый номер получает аккаунт после проверки кода, поэтому ответ — всегда сессия.
+	const loginWithPhone = async (payload: PhoneLoginPayloadInterface): Promise<UserInterface> => {
+		const { data } = await $api.post<SessionResponseInterface>('/auth/phone/login', payload)
+		user.value = data.user
+		return data.user
 	}
 
 	const logout = async (): Promise<void> => {
@@ -82,6 +95,8 @@ export const useAuth = () => {
 		fetchProfile,
 		confirmEmail,
 		login,
+		sendPhoneCode,
+		loginWithPhone,
 		logout,
 		loginWithOAuth,
 		register,

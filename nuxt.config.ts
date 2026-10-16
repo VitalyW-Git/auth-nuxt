@@ -67,6 +67,9 @@ export default defineNuxtConfig({
 	},
 
 	vuetify: {
+		moduleOptions: {
+			prefixComposables: ['useLayout']
+		},
 		vuetifyOptions: {
 			theme: {
 				defaultTheme: 'dark',

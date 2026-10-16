@@ -8,6 +8,11 @@ const { user, logout } = useAuth()
 const isLoading = ref(false)
 const errors = ref<string[]>([])
 
+// Имя необязательно: у аккаунта, созданного по телефону, его пока нет (ADR 0012).
+const greeting = computed((): string =>
+	user.value?.name ? `Здравствуйте, ${user.value.name}` : 'Здравствуйте'
+)
+
 const onLogout = async (): Promise<void> => {
 	errors.value = []
 	isLoading.value = true
@@ -26,7 +31,7 @@ const onLogout = async (): Promise<void> => {
 	<v-container class="d-flex justify-center align-center" style="min-height: 100vh">
 		<v-card v-if="user" width="440" class="pa-2">
 			<v-card-title class="text-h5 pt-4">
-				Здравствуйте, {{ user.displayName }}
+				{{ greeting }}
 			</v-card-title>
 			<v-card-subtitle>Эта страница доступна только после входа</v-card-subtitle>
 
@@ -43,7 +48,8 @@ const onLogout = async (): Promise<void> => {
 				</v-alert>
 
 				<v-list density="compact">
-					<v-list-item title="Email" :subtitle="user.email" />
+					<v-list-item title="Email" :subtitle="user.email ?? 'Не указан'" />
+					<v-list-item title="Телефон" :subtitle="user.phone ?? 'Не указан'" />
 					<v-list-item title="Роль" :subtitle="user.role" />
 					<v-list-item
 						title="Email подтверждён"

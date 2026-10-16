@@ -266,6 +266,105 @@
 		text-decoration: none;
 	}
 
+	// вход: переключатель «Телефон | Email», макет Penpot «Login — Phone»
+
+	&__tabs {
+		display: flex;
+		gap: 4px;
+		margin-bottom: 16px;
+		padding: 4px;
+		border-radius: 12px;
+		background: $tint;
+	}
+
+	&__tab {
+		flex: 1;
+		height: 36px;
+		border: 0;
+		border-radius: 9px;
+		background: none;
+		color: $muted;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 600;
+		cursor: pointer;
+
+		&--active {
+			background: $white;
+			box-shadow: 0 1px 3px rgba($ink, 0.08);
+			color: $primary-dark;
+			font-weight: 700;
+		}
+
+		&:focus-visible {
+			outline: 2px solid $primary;
+			outline-offset: 2px;
+		}
+	}
+
+	// вход по телефону: подсказка под полем и шаг с кодом из SMS
+
+	&__phone {
+		margin-bottom: 12px;
+
+		// в макете подсказка выровнена по краю поля, без отступа Vuetify
+		.v-input__details {
+			padding-inline: 0;
+		}
+
+		.v-messages__message {
+			font-size: 13px;
+			line-height: 1.5;
+		}
+	}
+
+	&__subtitle--code {
+		margin-bottom: 12px;
+	}
+
+	// номер не переносится посередине
+	&__nowrap {
+		white-space: nowrap;
+	}
+
+	&__change-phone {
+		display: block;
+		margin-bottom: 16px;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	&__code {
+		justify-content: flex-start;
+		padding: 0;
+
+		.v-otp-input__content {
+			justify-content: flex-start;
+			gap: 12px;
+			max-width: none;
+			height: 72px;
+			padding: 0;
+		}
+
+		.v-field {
+			flex: 1 1 0;
+			max-width: 64px;
+			border-radius: 14px;
+		}
+
+		.v-otp-input__field {
+			font-size: 28px;
+			font-weight: 800;
+		}
+	}
+
+	&__timer {
+		margin: 16px 0;
+		color: $muted;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
 	// экраны результата: письмо отправлено, пароль изменён
 
 	&__status {

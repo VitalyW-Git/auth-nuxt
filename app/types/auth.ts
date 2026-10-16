@@ -21,8 +21,8 @@ export interface LoginPayloadInterface {
 // Повторяет UserInterface бэкенда: src/modules/user/domain/common/interfaces/user.interface.ts
 export interface UserInterface {
 	id: string
-	email: string
-	displayName: string
+	email: string | null
+	name: string | null
 	picture: string | null
 	role: string
 	isVerified: boolean
@@ -30,6 +30,8 @@ export interface UserInterface {
 	method: string
 	createdAt: string
 	updatedAt: string
+	phone: string | null
+	isPhoneVerified: boolean
 }
 
 export interface SessionResponseInterface {
@@ -39,3 +41,12 @@ export interface SessionResponseInterface {
 export type LoginResponseType = SessionResponseInterface | MessageResponseInterface
 
 export type OAuthProviderType = 'google' | 'yandex'
+
+// Вкладки страницы входа: по коду из SMS или по email и паролю.
+export type LoginMethodType = 'phone' | 'email'
+
+// DTO на бэкенде ещё нет (вход по телефону, ADR 0011): поля — по схеме users.phone и tokens.
+export interface PhoneLoginPayloadInterface {
+	phone: string
+	code: string
+}
