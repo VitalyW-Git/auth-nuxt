@@ -5,6 +5,7 @@ import type {
 	OAuthProviderType,
 	PhoneLoginPayloadInterface,
 	RegisterPayloadInterface,
+	SendPhoneCodeResponseInterface,
 	SessionResponseInterface,
 	UserInterface
 } from '~/types/auth'
@@ -43,8 +44,9 @@ export const useAuth = () => {
 	}
 
 	// Вход по телефону (ADR 0011). Эндпоинтов на бэкенде пока нет, адреса предварительные.
-	const sendPhoneCode = async (phone: string): Promise<void> => {
-		await $api.post('/auth/phone/code', { phone })
+	const sendPhoneCode = async (phone: string): Promise<SendPhoneCodeResponseInterface> => {
+		const { data } = await $api.post<SendPhoneCodeResponseInterface>('/auth/phone/code', { phone })
+		return data
 	}
 
 	// Новый номер получает аккаунт после проверки кода, поэтому ответ — всегда сессия.

@@ -16,10 +16,12 @@ const phoneDigits = ref('')
 const code = ref('')
 const isValid = ref<boolean | null>(false)
 const isLoading = ref(false)
+// Тестовый режим SMS.ru или отправка в лог: SMS не придёт, код — в логе сервера.
+const isTestMode = ref(false)
 const secondsLeft = ref(0)
 const timerId = ref<ReturnType<typeof setInterval> | null>(null)
 
-// DTO на бэкенде ещё нет: при его появлении сверить тексты и перенести их оттуда.
+// Тексты повторяют SendPhoneCodeDto; источник истины — сервер.
 const phoneRules = [
 	(v: string) => !!v || 'Телефон обязателен для заполнения.',
 	(v: string) => isPhoneComplete(extractPhoneDigits(v)) || 'Введите 10 цифр номера после +7.'
@@ -65,7 +67,8 @@ const requestCode = async (): Promise<void> => {
 	emit('error', [])
 	isLoading.value = true
 	try {
-		await sendPhoneCode(toE164Phone(phoneDigits.value))
+		const result = await sendPhoneCode(toE164Phone(phoneDigits.value))
+		isTestMode.value = result.isTestMode
 		code.value = ''
 		isCodeStep.value = true
 		startTimer()
@@ -146,6 +149,15 @@ onBeforeUnmount(stopTimer)
 		<button type="button" class="auth__link-btn auth__change-phone" @click="onChangePhone">
 			Изменить номер
 		</button>
+
+		<v-alert
+			v-if="isTestMode"
+			type="info"
+			variant="tonal"
+			density="compact"
+			class="auth__test-mode"
+			text="Тестовый режим: SMS не отправлено, код — в логе сервера."
+		/>
 
 		<v-form class="auth__form" @submit.prevent="onSubmitCode">
 			<v-otp-input

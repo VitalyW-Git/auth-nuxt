@@ -45,8 +45,13 @@ export type OAuthProviderType = 'google' | 'yandex'
 // Вкладки страницы входа: по коду из SMS или по email и паролю.
 export type LoginMethodType = 'phone' | 'email'
 
-// DTO на бэкенде ещё нет (вход по телефону, ADR 0011): поля — по схеме users.phone и tokens.
+// Повторяет PhoneLoginDto (вход по телефону, ADR 0011).
 export interface PhoneLoginPayloadInterface {
 	phone: string
 	code: string
+}
+
+// Ответ POST /auth/phone/code. isTestMode — SMS не отправлено, код в логе сервера (только в разработке).
+export interface SendPhoneCodeResponseInterface {
+	isTestMode: boolean
 }
