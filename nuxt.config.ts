@@ -36,10 +36,17 @@ export default defineNuxtConfig({
 		}
 	},
 
-	css: ['~/assets/styles/layers.css', '@mdi/font/css/materialdesignicons.css'],
+	css: ['@mdi/font/css/materialdesignicons.css'],
 
 	app: {
 		head: {
+			style: [
+				{
+					tagPriority: 'critical',
+					textContent:
+						'@layer vuetify-core, vuetify-components, vuetify-overrides, vuetify-utilities, vuetify-final;'
+				}
+			],
 			link: [
 				{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
 				{ rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
@@ -72,9 +79,7 @@ export default defineNuxtConfig({
 		},
 		vuetifyOptions: {
 			theme: {
-				defaultTheme: 'dark',
-				// Светлая тема главной страницы, по макету «Home — Desktop 1440» в Figma.
-				// Формы входа и кабинет остаются в тёмной теме по умолчанию.
+				defaultTheme: 'clinic',
 				themes: {
 					clinic: {
 						dark: false,
